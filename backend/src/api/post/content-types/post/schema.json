@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "categories",
+  "collectionName": "posts",
   "info": {
-    "singularName": "category",
-    "pluralName": "categories",
-    "displayName": "category",
+    "singularName": "post",
+    "pluralName": "posts",
+    "displayName": "post",
     "description": ""
   },
   "options": {
@@ -12,21 +12,19 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "title": {
       "type": "string",
       "required": true
     },
+    "content": {
+      "type": "string"
+    },
     "slug": {
       "type": "uid",
-      "targetField": "name"
+      "targetField": "title",
+      "required": true
     },
-    "products": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::product.product",
-      "mappedBy": "categories"
-    },
-    "image": {
+    "cover": {
       "type": "media",
       "multiple": true,
       "required": false,
@@ -34,11 +32,16 @@
         "images"
       ]
     },
-    "posts": {
+    "authors": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::post.post",
-      "mappedBy": "category"
+      "target": "admin::user"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "posts"
     }
   }
 }
